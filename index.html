@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curriculum Vitae - Alfian Eko Sejati (Responsive)</title>
     <style>
-        /* CSS RESET & VARS */
+        /* CSS Umum & Variabel */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,26 +14,25 @@
             color: #333;
         }
 
-        /* Variables for colors */
         :root {
             --dark-color: #2c3e50; /* Dark Blue/Gray */
             --accent-color: #f39c12; /* Yellow Accent */
             --light-text: #ecf0f1;
         }
 
-        /* CV CONTAINER - Responsive Layout */
+        /* CV CONTAINER */
         .cv-container {
             display: flex;
-            flex-direction: row; /* Default: two columns */
             max-width: 1200px;
             margin: 0 auto;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             background-color: #fff;
+            min-height: 100vh; /* Agar CV setinggi layar di desktop */
         }
 
         /* KOLOM KIRI (Dark Section) */
         .left-column {
-            width: 35%;
+            flex: 0 0 35%; /* Mengatur lebar 35% */
             background-color: var(--dark-color);
             color: var(--light-text);
             padding: 40px 30px;
@@ -43,31 +42,21 @@
         .contact-info {
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            flex-wrap: wrap;
             font-size: 0.9em;
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .contact-info div {
-            flex-basis: 100%; /* Default to full width for small screen */
-            margin-bottom: 5px;
-        }
+        .contact-info div { margin-bottom: 5px; }
 
-        .profile-picture-container {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+        .profile-picture-container { text-align: center; margin-bottom: 30px; }
         .profile-picture {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 4px solid var(--accent-color);
-            background-color: #ccc;
-            display: inline-block;
-            overflow: hidden;
+            width: 150px; height: 150px; border-radius: 50%;
+            border: 4px solid var(--accent-color); background-color: #ccc;
+            display: inline-block; overflow: hidden;
         }
+        .profile-picture img { width: 100%; height: 100%; object-fit: cover; }
 
         .left-column h3 {
             color: var(--light-text);
@@ -78,43 +67,28 @@
             font-size: 1.2em;
         }
 
+        .education-item { margin-bottom: 20px; }
         .education-item p { margin: 0; font-size: 0.9em; }
         .education-item strong {
-            color: var(--accent-color);
-            font-size: 1.1em;
-            display: block;
-            margin-bottom: 5px;
+            color: var(--accent-color); display: block; margin-bottom: 5px;
         }
 
         .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            list-style: none;
-            padding: 0;
-            justify-content: center; /* Center skills on smaller screen */
+            display: flex; flex-wrap: wrap; gap: 10px;
+            list-style: none; padding: 0; justify-content: center;
         }
         
         .skill-circle {
-            background-color: var(--accent-color);
-            color: var(--dark-color);
-            width: 70px; /* Slightly larger circle */
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75em;
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.2;
-            padding: 5px;
-            box-sizing: border-box;
+            background-color: var(--accent-color); color: var(--dark-color);
+            width: 70px; height: 70px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75em; font-weight: bold; text-align: center;
+            line-height: 1.2; padding: 5px; box-sizing: border-box;
         }
         
         /* KOLOM KANAN (Light Section) */
         .right-column {
-            width: 65%;
+            flex: 1; /* Mengisi sisa ruang */
             padding: 40px 30px;
             box-sizing: border-box;
             background-color: #fff;
@@ -145,15 +119,13 @@
             margin-bottom: 15px;
             flex-wrap: wrap;
         }
-        .header-right .contact span {
-            margin-bottom: 5px;
-        }
+        .header-right .contact span { margin-bottom: 5px; }
 
         .header-right h1 { margin: 5px 0 0 0; font-size: 2.2em; }
         .header-right .title { font-weight: bold; margin-top: 5px; display: block; }
         .header-right .summary { margin-top: 15px; font-size: 0.95em; line-height: 1.6; color: #333; }
 
-        .work-experience h2 {
+        .work-experience h2, .portfolio-section h2 {
             color: var(--dark-color);
             font-size: 1.5em;
             border-bottom: 2px solid var(--dark-color);
@@ -172,33 +144,33 @@
         .job-item .company { font-style: italic; font-size: 0.9em; margin-bottom: 10px; }
         .job-item ul { list-style: disc; padding-left: 20px; margin: 5px 0; font-size: 0.9em; }
 
-
         /* RESPONSIVENESS (Media Query) */
         @media (max-width: 768px) {
             .cv-container {
-                flex-direction: column; /* Stacking columns vertically on smaller screens */
-                margin: 0;
+                flex-direction: column; /* Kolom disusun vertikal */
                 box-shadow: none;
             }
 
             .left-column, .right-column {
-                width: 100%;
+                flex: none; /* Menghapus fleksibilitas */
+                width: 100%; /* Mengambil lebar penuh */
                 padding: 20px;
             }
 
             .header-right {
-                margin: -20px -20px 20px -20px; /* Adjust margin for smaller screen padding */
-                padding: 15px 20px 15px 40px;
+                margin: -20px -20px 20px -20px; 
+                padding: 15px 20px 15px 30px; /* Padding lebih kecil */
             }
             .header-right::before {
-                width: 10px; /* Thinner white strip */
+                width: 10px; 
             }
 
-            .contact-info div {
-                flex-basis: 48%; /* Display side-by-side for call and area */
+            .contact-info {
+                justify-content: center; /* Kontak di tengah di layar kecil */
             }
-            .skills-list {
-                justify-content: space-around; /* Better spacing for stacked skills */
+            .contact-info div {
+                flex-basis: auto; 
+                margin: 0 10px;
             }
         }
     </style>
@@ -215,30 +187,40 @@
 
         <div class="profile-picture-container">
             <div class="profile-picture">
-                <div style="text-align: center; line-height: 150px; font-size: 1.5em;"></div>
+                <img src="data:image/jpeg;base64,..." alt="Foto Profil Alfian Eko Sejati">
             </div>
+        </div>
+
+        <h3 style="margin-top: 0;">PERSONAL DATA</h3>
+        <div class="education-item">
+            <p><strong>Tempat/Tgl Lahir</strong></p>
+            [span_2](start_span)<p>Surakarta, 15 Juni 1991[span_2](end_span)</p>
+        </div>
+        <div class="education-item">
+            <p><strong>Status</strong></p>
+            [span_3](start_span)<p>Menikah[span_3](end_span)</p>
         </div>
 
         <h3>EDUCATION</h3>
         <div class="education-item">
-            [span_2](start_span)<div style="font-size: 0.8em;">September 2020 - Juli 2023[span_2](end_span)</div>
-            [span_3](start_span)<p><strong>SARJANA TEKNIK INFORMATIKA</strong>[span_3](end_span)</p>
-            [span_4](start_span)<p>UNIVERSITAS SURAKARTA[span_4](end_span)</p>
+            [span_4](start_span)<div style="font-size: 0.8em;">September 2020 - Juli 2023[span_4](end_span)</div>
+            <p><strong>SARJANA TEKNIK INFORMATIKA</strong></p>
+            [span_5](start_span)<p>UNIVERSITAS SURAKARTA[span_5](end_span)</p>
         </div>
         <div class="education-item">
-            [span_5](start_span)<div style="font-size: 0.8em;">Agustus 2010 - Juli 2013[span_5](end_span)</div>
-            [span_6](start_span)<p><strong>DIPLOMA III TEKNIK INFORMATIKA</strong>[span_6](end_span)</p>
+            [span_6](start_span)<div style="font-size: 0.8em;">Agustus 2010 - Juli 2013[span_6](end_span)</div>
+            <p><strong>DIPLOMA III TEKNIK INFORMATIKA</strong></p>
             [span_7](start_span)<p>UNIVERSITAS SEBELAS MARET[span_7](end_span)</p>
         </div>
 
         <h3 style="margin-top: 30px;">SKILLS</h3>
         <ul class="skills-list">
             <li><div class="skill-circle"><span>PHP, JS, <br>HTML/CSS</span></div></li>
-            <li><div class="skill-circle"><span>MySQL, <br>PostgreSQL</span></div></li>
-            <li><div class="skill-circle"><span>Network <br>Troubleshooting</span></div></li>
-            <li><div class="skill-circle"><span>UI/UX <br>(Photoshop)</span></div></li>
-            <li><div class="skill-circle"><span>Problem <br>Analysis</span></div></li>
-            <li><div class="skill-circle"><span>Teamwork <br>& Support</span></div></li>
+            [span_8](start_span)<li><div class="skill-circle"><span>Database <br>(MySQL, PG)[span_8](end_span)</span></div></li>
+            [span_9](start_span)<li><div class="skill-circle"><span>Jaringan & <br>Troubleshooting[span_9](end_span)</span></div></li>
+            [span_10](start_span)<li><div class="skill-circle"><span>UI/UX, <br>Editing[span_10](end_span)</span></div></li>
+            [span_11](start_span)<li><div class="skill-circle"><span>Problem <br>Analysis[span_11](end_span)</span></div></li>
+            [span_12](start_span)<li><div class="skill-circle"><span>Teamwork <br>Litsas Divisi[span_12](end_span)</span></div></li>
         </ul>
         
     </div>
@@ -247,15 +229,15 @@
         
         <div class="header-right">
             <div class="contact">
-                [span_8](start_span)<span>EMAIL: alfianekosejati91@gmail.com[span_8](end_span)</span>
-                <span>WEB: (sttw.ac.id/portofolio)</span>
+                [span_13](start_span)<span>EMAIL: alfianekosejati91@gmail.com[span_13](end_span)</span>
+                [span_14](start_span)<span>WEB: www.sttw.ac.id[span_14](end_span)</span>
             </div>
             
-            <h1>ALFIAN EKO SEJATI</h1>
-            <span class="title">STAFF IT</span>
+            [span_15](start_span)<h1>ALFIAN EKO SEJATI[span_15](end_span)</h1>
+            [span_16](start_span)<span class="title">STAFF IT[span_16](end_span)</span>
             
             <p class="summary">
-                [span_9](start_span)Dengan pengalaman 7 tahun dalam pengelolaan sistem informasi akademik, pengembangan website kampus, manajemen jaringan dan server, serta dukungan teknis harian di lingkungan institusi pendidikan[span_9](end_span). [span_10](start_span)Terbiasa bekerja dengan tim, menyelesaikan masalah teknis, dan mendukung kegiatan administrasi serta pembelajaran berbasis teknologi[span_10](end_span).
+                [span_17](start_span)Dengan pengalaman 7 tahun dalam pengelolaan sistem informasi akademik, pengembangan website kampus, manajemen jaringan dan server, serta dukungan teknis harian di lingkungan institusi pendidikan[span_17](end_span). [span_18](start_span)Terbiasa bekerja dengan tim, menyelesaikan masalah teknis, dan mendukung kegiatan administrasi serta pembelajaran berbasis teknologi[span_18](end_span).
             </p>
         </div>
 
@@ -263,24 +245,24 @@
             <h2>WORK EXPERIENCE</h2>
 
             <div class="job-item">
-                [span_11](start_span)<div class="date">Juli 2017 - Mei 2025[span_11](end_span)</div>
+                [span_19](start_span)<div class="date">Juli 2017 - Mei 2025[span_19](end_span)</div>
                 <p class="position">Staff IT</p>
-                [span_12](start_span)<p class="company">STT WARGA SURAKARTA[span_12](end_span)</p>
+                [span_20](start_span)<p class="company">STT WARGA SURAKARTA[span_20](end_span)</p>
                 <ul>
-                    [span_13](start_span)<li>Bertanggung jawab dalam pengelolaan, pembuatan, dan pengembangan sistem informasi akademik[span_13](end_span).</li>
-                    [span_14](start_span)<li>Pengelolaan insfrastruktur OnPrem dan OnCloud yang berada di UPT Pusat Data dan Komunikasi[span_14](end_span).</li>
-                    [span_15](start_span)<li>Bekerjasama dengan tim lain untuk mendukung kebutuhan teknis kegiatan administrasi[span_15](end_span).</li>
+                    [span_21](start_span)<li>Bertanggung jawab dalam pengelolaan, pembuatan, dan pengembangan sistem informasi akademik[span_21](end_span).</li>
+                    [span_22](start_span)<li>Pengelolaan insfrastruktur OnPrem dan OnCloud yang berada di UPT Pusat Data dan Komunikasi[span_22](end_span).</li>
+                    [span_23](start_span)<li>Bekerjasama dengan tim lain untuk mendukung kebutuhan teknis kegiatan administrasi[span_23](end_span).</li>
                 </ul>
             </div>
 
             <div class="job-item">
-                [span_16](start_span)<div class="date">November 2013 - Maret 2016[span_16](end_span)</div>
+                [span_24](start_span)<div class="date">November 2013 - Maret 2016[span_24](end_span)</div>
                 <p class="position">Credit Marketing Officer</p>
-                [span_17](start_span)<p class="company">PT SUMMIT OTO FINANCE[span_17](end_span)</p>
+                [span_25](start_span)<p class="company">PT SUMMIT OTO FINANCE[span_25](end_span)</p>
                 <ul>
-                    [span_18](start_span)<li>Melakukan survei dan analisa kelayakan kredit calon konsumen[span_18](end_span).</li>
-                    [span_19](start_span)<li>Menjalin hubungan baik dengan dealer yang bekerjasama dan konsumen[span_19](end_span).</li>
-                    [span_20](start_span)<li>Bekerjasama dengan tim dalam proses administrasi pengajuan kredit hingga pencairan[span_20](end_span).</li>
+                    [span_26](start_span)<li>Melakukan survei dan analisa kelayakan kredit calon konsumen[span_26](end_span).</li>
+                    [span_27](start_span)<li>Menjalin hubungan baik dengan dealer yang bekerjasama dan konsumen[span_27](end_span).</li>
+                    [span_28](start_span)<li>Bekerjasama dengan tim dalam proses administrasi pengajuan kredit hingga pencairan[span_28](end_span).</li>
                 </ul>
             </div>
         </div>
@@ -288,9 +270,12 @@
         <div class="portfolio-section">
             <h2 style="border-bottom: 2px solid var(--dark-color);">KEY PROJECTS / PORTOFOLIO</h2>
             <div class="job-item" style="border-left: 3px solid #ccc;">
-                <p class="date">Pengembangan Sistem Informasi Kampus (Codeigniter)</p>
-                [span_21](start_span)<p class="position" style="font-size: 1em; color: #555;">e-Learning[span_21](end_span)[span_22](start_span), Siska[span_22](end_span)[span_23](start_span), HRM[span_23](end_span)[span_24](start_span), CDC[span_24](end_span)[span_25](start_span), SIM.PPPM[span_25](end_span), SIM.MAWA</p>
-                [span_26](start_span)<p style="margin-bottom: 0; font-size: 0.9em;">Mencakup pengelolaan akademik, kegiatan mahasiswa, penilaian kinerja, tracer study, penelitian, dan SKPI[span_26](end_span).</p>
+                [span_29](start_span)<p class="date">Pengembangan Sistem Informasi Kampus (Codeigniter)[span_29](end_span)</p>
+                [span_30](start_span)<p class="position" style="font-size: 1em; color: #555;">e-Learning, Siska, HRM, CDC, SIM.PPPM, SIM.MAWA[span_30](end_span)</p>
+                [span_31](start_span)<p style="margin-bottom: 0; font-size: 0.9em;">Mencakup pengelolaan akademik, kegiatan mahasiswa, penilaian kinerja dosen, tracer study, penelitian, dan pembuatan SKPI[span_31](end_span).</p>
+                <div style="font-size: 0.85em; margin-top: 10px;">
+                    [span_32](start_span)Website Profil (Wordpress)[span_32](end_span) | [span_33](start_span)Pengelolaan SEO & Media Sosial[span_33](end_span)
+                </div>
             </div>
         </div>
 
